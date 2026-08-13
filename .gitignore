@@ -33,6 +33,11 @@ yarn-error.*
 # editores
 .idea/
 
+# instrucoes locais de IA
+.claude/
+CLAUDE.md
+AGENTS.md
+
 # local env files
 .env
 .env*.local
