@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "meu-app",
-    "slug": "meu-app",
+    "name": "React. Prime",
+    "slug": "react-prime",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "meuapp",
+    "scheme": "reactprime",
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/expo.icon"
