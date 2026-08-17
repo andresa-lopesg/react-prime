@@ -22,6 +22,7 @@ import api, { key } from "../../services/api";
 
 import Generes from "../../components/Generes";
 import ModalLink from "../../components/ModalLink";
+import { deleteMovie, hasMovie, saveMovie } from "../../utils/storage";
 
 function Detail() {
   const navigation = useNavigation();
@@ -29,6 +30,7 @@ function Detail() {
 
   const [movie, setMovie] = useState({});
   const [openLink, setOpenLink] = useState(false);
+  const [favoritedMovie, setFavoritedMovie] = useState(false);
 
   useEffect(() => {
     let isActive = true;
@@ -43,6 +45,9 @@ function Detail() {
 
       if (isActive) {
         setMovie(response.data);
+
+        const isFavorite = await hasMovie(response.data);
+        setFavoritedMovie(isFavorite);
       }
     }
     if (isActive) {
@@ -53,14 +58,31 @@ function Detail() {
     };
   }, []);
 
+  async function handlefavoriteMovie(movie) {
+    if (favoritedMovie) {
+      await deleteMovie(movie.id);
+      setFavoritedMovie(false);
+      alert("Filme removio da sua lista");
+      return;
+    }
+
+    await saveMovie("@primereact", movie);
+    setFavoritedMovie(true);
+    alert("Filme salvo na sua lista");
+  }
+
   return (
     <Container>
       <Header>
         <HeaderButton activeOpacity={0.7} onPress={() => navigation.goBack()}>
           <Feather name="arrow-left" size={28} color="#FFF" />
         </HeaderButton>
-        <HeaderButton>
-          <Ionicons name="bookmark" size={28} color="#FFF" />
+        <HeaderButton onPress={() => handlefavoriteMovie(movie)}>
+          {favoritedMovie ? (
+            <Ionicons name="bookmark" size={28} color="#FFF" />
+          ) : (
+            <Ionicons name="bookmark-outline" size={28} color="#FFF" />
+          )}
         </HeaderButton>
       </Header>
 
