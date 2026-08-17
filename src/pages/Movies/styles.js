@@ -10,3 +10,7 @@ export const Title = styled.Text`
   color: #fff;
   font-size: 18px;
 `;
+
+export const ListMovies = styled.FlatList`
+  padding: 0 14px;
+`;
