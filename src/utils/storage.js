@@ -16,13 +16,11 @@ export async function saveMovie(key, newMovie) {
   const hasMovie = moviesStored.some((item) => item.id === newMovie.id);
 
   if (hasMovie) {
-    console.log("Esse filme ja eite na sua lista");
     return;
   }
 
   moviesStored.push(newMovie);
   await AsyncStorage.setItem(key, JSON.stringify(moviesStored));
-  console.log("filme salvo com sucesso!");
 }
 //Deletar
 export async function deleteMovie(id) {
@@ -33,7 +31,6 @@ export async function deleteMovie(id) {
   });
 
   await AsyncStorage.setItem("@primereact", JSON.stringify(myMovies));
-  console.log("filme deletado com sucesso");
   return myMovies;
 }
 

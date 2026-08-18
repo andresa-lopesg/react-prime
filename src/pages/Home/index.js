@@ -33,17 +33,8 @@ function Home() {
 
   useEffect(() => {
     let isActive = true;
-    const ac = new AbortController();
 
     async function getMovies() {
-      //const response = await api.get("movie/now_playing", {
-      //params: {
-      // api_key: key,
-      //language: "pt-BR",
-      //page: 1,
-      //  },
-      //});
-
       const [nowData, popularData, topData] = await Promise.all([
         api.get("/movie/now_playing", {
           params: {
@@ -89,7 +80,6 @@ function Home() {
 
     return () => {
       isActive = false;
-      ac.abort();
     };
   }, []);
 
