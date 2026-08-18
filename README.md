@@ -51,8 +51,9 @@ Abra no emulador Android, no simulador iOS ou no
 
 ```
 src/
-├── components/    Header e SliderItem
-├── pages/         Home e Movies
+├── components/    Header, SliderItem, SearchItem, FavoriteItem,
+│                  Generes e ModalLink
+├── pages/         Home, Detail, Search e Movies
 ├── routes/        drawer e stack
 ├── services/      cliente da API da TMDB
 └── utils/         funções auxiliares
