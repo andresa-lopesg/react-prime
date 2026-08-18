@@ -62,7 +62,7 @@ function Detail() {
     if (favoritedMovie) {
       await deleteMovie(movie.id);
       setFavoritedMovie(false);
-      alert("Filme removio da sua lista");
+      alert("Filme removido da sua lista");
       return;
     }
 

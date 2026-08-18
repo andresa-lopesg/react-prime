@@ -22,7 +22,7 @@ import { getListMovies, randomBanner } from "../../utils/movie";
 
 function Home() {
   const [nowMovies, setNowMovies] = useState([]);
-  const [popularMovies, setPopulaMovies] = useState([]);
+  const [popularMovies, setPopularMovies] = useState([]);
   const [topMovies, setTopMovies] = useState([]);
   const [bannerMovie, setBannerMovie] = useState({});
   const [input, setInput] = useState("");
@@ -78,7 +78,7 @@ function Home() {
         );
 
         setNowMovies(nowList);
-        setPopulaMovies(popularList);
+        setPopularMovies(popularList);
         setTopMovies(topList);
 
         setLoading(false);
@@ -155,7 +155,7 @@ function Home() {
           keyExtractor={(item) => String(item.id)}
         />
 
-        <Title>Poupulares</Title>
+        <Title>Populares</Title>
         <SliderMovie
           horizontal={true}
           showsHorizontalScrollIndicator={false}
