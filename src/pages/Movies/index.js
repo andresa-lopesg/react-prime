@@ -5,7 +5,11 @@ import {
 import { useEffect, useState } from "react";
 import FavoriteItem from "../../components/FavoriteItem";
 import Header from "../../components/Header";
-import { deleteMovie, getMovieSave } from "../../utils/storage";
+import {
+  deleteMovie,
+  getMovieSave,
+  MOVIES_KEY,
+} from "../../utils/storage";
 import { Container, ListMovies } from "./styles";
 
 function Movies() {
@@ -18,7 +22,7 @@ function Movies() {
     let isActive = true;
 
     async function getFavoriteMovies() {
-      const result = await getMovieSave("@primereact");
+      const result = await getMovieSave(MOVIES_KEY);
 
       if (isActive) {
         setMovies(result);
