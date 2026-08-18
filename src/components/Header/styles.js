@@ -19,8 +19,3 @@ export const Title = styled.Text`
   color: #fff;
   margin-left: 14px;
 `;
-
-export const SliderMovie = styled.FlatList`
-  height: 250px;
-  padding: 0 14px;
-`;

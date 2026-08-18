@@ -7,7 +7,7 @@ import {
   Rate,
   RateContainer,
   Title,
-} from "./style";
+} from "./styles";
 
 function FavoriteItem({ data, handleDelete, navigatePage }) {
   return (

@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 
-import { BannerItem, Container, Rate, RateContainer, Title } from "./style";
+import { BannerItem, Container, Rate, RateContainer, Title } from "./styles";
 
 function SliderItem({ data, navigatePage }) {
   return (

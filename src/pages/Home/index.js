@@ -7,13 +7,13 @@ import {
   Input,
   SearchButton,
   SearchContainer,
+  SliderMovie,
   Title,
 } from "./styles";
 
 import { Feather } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
 import Header from "../../components/Header";
-import { SliderMovie } from "../../components/Header/style";
 import SliderItem from "../../components/SliderItem";
 
 import { useNavigation } from "@react-navigation/native";

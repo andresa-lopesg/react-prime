@@ -1,4 +1,4 @@
-import { Container, Name } from "./style";
+import { Container, Name } from "./styles";
 
 function Generes({ data }) {
   return (

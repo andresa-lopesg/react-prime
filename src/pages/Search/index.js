@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { Container, ListMovies } from "./style";
+import { Container, ListMovies } from "./styles";
 
 import { useNavigation, useRoute } from "@react-navigation/native";
 
-import api, { key } from "../services/api";
+import api, { key } from "../../services/api";
 
-import SearchItem from "../SearchItem";
+import SearchItem from "../../components/SearchItem";
 function Search() {
   const navigation = useNavigation();
   const route = useRoute();

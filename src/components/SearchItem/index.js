@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Banner, Container, Rate, RateContainer, Title } from "./style";
+import { Banner, Container, Rate, RateContainer, Title } from "./styles";
 
 function SearchItem({ data, navigatePage }) {
   function detailMovie() {

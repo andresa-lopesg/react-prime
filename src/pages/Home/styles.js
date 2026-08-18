@@ -48,3 +48,8 @@ export const Banner = styled.Image`
   border-radius: 6px;
   margin: 0 14px;
 `;
+
+export const SliderMovie = styled.FlatList`
+  height: 250px;
+  padding: 0 14px;
+`;

@@ -1,5 +1,5 @@
 import WebView from "react-native-webview";
-import { BackButton, Name } from "./style";
+import { BackButton, Name } from "./styles";
 
 import { Feather } from "@expo/vector-icons";
 

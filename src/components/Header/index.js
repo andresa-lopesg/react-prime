@@ -1,7 +1,7 @@
 import { Feather } from "@expo/vector-icons";
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 
-import { Container, MenuButton, Title } from "./style";
+import { Container, MenuButton, Title } from "./styles";
 
 function Header({ title }) {
   const navigation = useNavigation();
