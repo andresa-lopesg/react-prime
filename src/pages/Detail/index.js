@@ -22,7 +22,12 @@ import api, { key } from "../../services/api";
 
 import Generes from "../../components/Generes";
 import ModalLink from "../../components/ModalLink";
-import { deleteMovie, hasMovie, saveMovie } from "../../utils/storage";
+import {
+  deleteMovie,
+  hasMovie,
+  MOVIES_KEY,
+  saveMovie,
+} from "../../utils/storage";
 
 function Detail() {
   const navigation = useNavigation();
@@ -66,7 +71,7 @@ function Detail() {
       return;
     }
 
-    await saveMovie("@primereact", movie);
+    await saveMovie(MOVIES_KEY, movie);
     setFavoritedMovie(true);
     alert("Filme salvo na sua lista");
   }
