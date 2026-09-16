@@ -13,6 +13,7 @@ import {
 
 import { Feather } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
+import ErrorMessage from "../../components/ErrorMessage";
 import Header from "../../components/Header";
 import SliderItem from "../../components/SliderItem";
 
@@ -28,6 +29,8 @@ function Home() {
   const [input, setInput] = useState("");
 
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [retry, setRetry] = useState(0);
 
   const navigation = useNavigation();
 
@@ -35,44 +38,53 @@ function Home() {
     let isActive = true;
 
     async function getMovies() {
-      const [nowData, popularData, topData] = await Promise.all([
-        api.get("/movie/now_playing", {
-          params: {
-            api_key: key,
-            language: "pt-BR",
-            page: 1,
-          },
-        }),
-        api.get("/movie/popular", {
-          params: {
-            api_key: key,
-            language: "pt-BR",
-            page: 1,
-          },
-        }),
-        api.get("/movie/top_rated", {
-          params: {
-            api_key: key,
-            language: "pt-BR",
-            page: 1,
-          },
-        }),
-      ]);
+      try {
+        const [nowData, popularData, topData] = await Promise.all([
+          api.get("/movie/now_playing", {
+            params: {
+              api_key: key,
+              language: "pt-BR",
+              page: 1,
+            },
+          }),
+          api.get("/movie/popular", {
+            params: {
+              api_key: key,
+              language: "pt-BR",
+              page: 1,
+            },
+          }),
+          api.get("/movie/top_rated", {
+            params: {
+              api_key: key,
+              language: "pt-BR",
+              page: 1,
+            },
+          }),
+        ]);
 
-      if (isActive) {
-        const nowList = getListMovies(15, nowData.data.results);
-        const popularList = getListMovies(10, popularData.data.results);
-        const topList = getListMovies(5, topData.data.results);
+        if (isActive) {
+          const nowList = getListMovies(15, nowData.data.results);
+          const popularList = getListMovies(10, popularData.data.results);
+          const topList = getListMovies(5, topData.data.results);
 
-        setBannerMovie(
-          nowData.data.results[randomBanner(nowData.data.results)],
-        );
+          setBannerMovie(
+            nowData.data.results[randomBanner(nowData.data.results)],
+          );
 
-        setNowMovies(nowList);
-        setPopularMovies(popularList);
-        setTopMovies(topList);
-
-        setLoading(false);
+          setNowMovies(nowList);
+          setPopularMovies(popularList);
+          setTopMovies(topList);
+          setError(false);
+        }
+      } catch {
+        if (isActive) {
+          setError(true);
+        }
+      } finally {
+        if (isActive) {
+          setLoading(false);
+        }
       }
     }
 
@@ -81,10 +93,15 @@ function Home() {
     return () => {
       isActive = false;
     };
-  }, []);
+  }, [retry]);
 
   function navigateDetailsPage(item) {
     navigation.navigate("Detail", { id: item.id });
+  }
+
+  function handleRetry() {
+    setLoading(true);
+    setRetry((count) => count + 1);
   }
 
   function handleSearchMovie() {
@@ -101,6 +118,18 @@ function Home() {
       </Container>
     );
   }
+
+  if (error) {
+    return (
+      <Container>
+        <ErrorMessage
+          message="Não foi possível carregar os filmes. Verifique sua conexão e a chave da API."
+          onRetry={handleRetry}
+        />
+      </Container>
+    );
+  }
+
   return (
     <Container>
       <Header title="React. Prime" />
@@ -173,6 +202,7 @@ function Home() {
           )}
           keyExtractor={(item) => String(item.id)}
         />
+
       </ScrollView>
     </Container>
   );

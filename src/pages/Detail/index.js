@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 import Stars from "react-native-stars";
 import api, { key } from "../../services/api";
 
+import ErrorMessage from "../../components/ErrorMessage";
 import Generes from "../../components/Generes";
 import ModalLink from "../../components/ModalLink";
 import {
@@ -36,32 +37,41 @@ function Detail() {
   const [movie, setMovie] = useState({});
   const [openLink, setOpenLink] = useState(false);
   const [favoritedMovie, setFavoritedMovie] = useState(false);
+  const [error, setError] = useState(false);
+  const [retry, setRetry] = useState(0);
 
   useEffect(() => {
     let isActive = true;
 
     async function getMovie() {
-      const response = await api.get(`/movie/${route.params?.id}`, {
-        params: {
-          api_key: key,
-          language: "pt-BR",
-        },
-      });
+      try {
+        const response = await api.get(`/movie/${route.params?.id}`, {
+          params: {
+            api_key: key,
+            language: "pt-BR",
+          },
+        });
 
-      if (isActive) {
-        setMovie(response.data);
+        if (isActive) {
+          setMovie(response.data);
+          setError(false);
 
-        const isFavorite = await hasMovie(response.data);
-        setFavoritedMovie(isFavorite);
+          const isFavorite = await hasMovie(response.data);
+          setFavoritedMovie(isFavorite);
+        }
+      } catch {
+        if (isActive) {
+          setError(true);
+        }
       }
     }
-    if (isActive) {
-      getMovie();
-    }
+
+    getMovie();
+
     return () => {
       isActive = false;
     };
-  }, []);
+  }, [retry]);
 
   async function handlefavoriteMovie(movie) {
     if (favoritedMovie) {
@@ -74,6 +84,27 @@ function Detail() {
     await saveMovie(MOVIES_KEY, movie);
     setFavoritedMovie(true);
     alert("Filme salvo na sua lista");
+  }
+
+  function handleRetry() {
+    setRetry((count) => count + 1);
+  }
+
+  if (error) {
+    return (
+      <Container>
+        <Header>
+          <HeaderButton activeOpacity={0.7} onPress={() => navigation.goBack()}>
+            <Feather name="arrow-left" size={28} color="#FFF" />
+          </HeaderButton>
+        </Header>
+
+        <ErrorMessage
+          message="Não foi possível carregar os detalhes do filme. Verifique sua conexão e a chave da API."
+          onRetry={handleRetry}
+        />
+      </Container>
+    );
   }
 
   return (
