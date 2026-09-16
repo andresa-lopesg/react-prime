@@ -63,12 +63,32 @@ use `npm run web`.
 ```
 src/
 ├── components/    Header, SliderItem, SearchItem, FavoriteItem,
-│                  Genres, ModalLink, Loading e ErrorMessage
+│                  Genres, ModalLink, Loading, Toast e ErrorMessage
 ├── pages/         Home, Detail, Search e Movies
 ├── routes/        drawer e stack
 ├── services/      cliente da API da TMDB
 └── utils/         funções auxiliares
 ```
+
+## Decisões técnicas
+
+**React Navigation no lugar do Expo Router.** O projeto nasceu do template
+com Expo Router, mas a navegação aqui é simples: um drawer de duas telas e uma
+stack dentro da primeira. No React Navigation isso fica explícito em dois
+arquivos, em vez de espalhado pela estrutura de pastas.
+
+**Favoritos no AsyncStorage, sem backend.** A lista é pessoal e não precisa
+sincronizar entre aparelhos. Subir um servidor só para guardar ids de filmes
+seria peso sem retorno.
+
+**A chave da API vai embutida no bundle — e tudo bem.** A chave v3 do TMDB só
+lê o catálogo público, e qualquer app que chama a API direto do aparelho acaba
+carregando a chave junto. Ela fica fora do versionamento e cada pessoa usa a
+sua; esconder de verdade exigiria um proxy próprio, que não se justifica num
+app desse tamanho.
+
+**Um `styles.js` por componente.** Mantém o JSX legível e deixa óbvio onde
+mexer no visual de cada tela.
 
 ## Atribuição
 
