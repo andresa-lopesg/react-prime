@@ -1,6 +1,7 @@
 import { ActivityIndicator, ScrollView } from "react-native";
 
 import {
+  Attribution,
   Banner,
   BannerButton,
   Container,
@@ -203,6 +204,10 @@ function Home() {
           keyExtractor={(item) => String(item.id)}
         />
 
+        <Attribution>
+          Dados fornecidos pelo TMDB. Este app não é endossado nem certificado
+          pelo TMDB.
+        </Attribution>
       </ScrollView>
     </Container>
   );

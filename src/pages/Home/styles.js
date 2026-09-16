@@ -53,3 +53,10 @@ export const SliderMovie = styled.FlatList`
   height: 250px;
   padding: 0 14px;
 `;
+
+export const Attribution = styled.Text`
+  padding: 24px 14px 32px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  text-align: center;
+`;

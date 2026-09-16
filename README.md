@@ -62,12 +62,19 @@ Abra no emulador Android, no simulador iOS ou no
 ```
 src/
 ├── components/    Header, SliderItem, SearchItem, FavoriteItem,
-│                  Generes e ModalLink
+│                  Generes, ModalLink e ErrorMessage
 ├── pages/         Home, Detail, Search e Movies
 ├── routes/        drawer e stack
 ├── services/      cliente da API da TMDB
 └── utils/         funções auxiliares
 ```
+
+## Atribuição
+
+<img src="assets/images/tmdb-logo.svg" alt="The Movie Database" width="180">
+
+Este projeto usa a API do [TMDB](https://www.themoviedb.org/), mas não é
+endossado nem certificado pelo TMDB.
 
 ## Licença
 
