@@ -3,13 +3,9 @@ import {
   useNavigation
 } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import FavoriteItem from "../../components/FavoriteItem";
-import Header from "../../components/Header";
-import {
-  deleteMovie,
-  getMovieSave,
-  MOVIES_KEY,
-} from "../../utils/storage";
+import FavoriteItem from "@/components/FavoriteItem";
+import Header from "@/components/Header";
+import { deleteMovie, getMovieSave } from "@/utils/storage";
 import { Container, ListMovies } from "./styles";
 
 function Movies() {
@@ -22,7 +18,7 @@ function Movies() {
     let isActive = true;
 
     async function getFavoriteMovies() {
-      const result = await getMovieSave(MOVIES_KEY);
+      const result = await getMovieSave();
 
       if (isActive) {
         setMovies(result);

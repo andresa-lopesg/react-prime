@@ -1,50 +1,37 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Chave usada para guardar a lista de filmes favoritos
-export const MOVIES_KEY = "@primereact";
+const MOVIES_KEY = "@primereact";
 
-//Buscar filmes salvos
-export async function getMovieSave(key) {
-  const myMovies = await AsyncStorage.getItem(key);
+export async function getMovieSave() {
+  const myMovies = await AsyncStorage.getItem(MOVIES_KEY);
 
-  let moviesSave = JSON.parse(myMovies) || [];
-
-  return moviesSave;
+  return JSON.parse(myMovies) || [];
 }
-// Salvar um novo filme
-export async function saveMovie(key, newMovie) {
-  let moviesStored = await getMovieSave(key);
 
-  // Se tiver algum filme salvo com mesmo id
-  const hasMovie = moviesStored.some((item) => item.id === newMovie.id);
+export async function saveMovie(newMovie) {
+  const moviesStored = await getMovieSave();
+  const alreadySaved = moviesStored.some((item) => item.id === newMovie.id);
 
-  if (hasMovie) {
+  if (alreadySaved) {
     return;
   }
 
   moviesStored.push(newMovie);
-  await AsyncStorage.setItem(key, JSON.stringify(moviesStored));
+  await AsyncStorage.setItem(MOVIES_KEY, JSON.stringify(moviesStored));
 }
-//Deletar
-export async function deleteMovie(id) {
-  let moviesStored = await getMovieSave(MOVIES_KEY);
 
-  let myMovies = moviesStored.filter((item) => {
-    return item.id !== id;
-  });
+export async function deleteMovie(id) {
+  const moviesStored = await getMovieSave();
+  const myMovies = moviesStored.filter((item) => item.id !== id);
 
   await AsyncStorage.setItem(MOVIES_KEY, JSON.stringify(myMovies));
+
   return myMovies;
 }
 
-// Filtrar filmes ja salvos
 export async function hasMovie(movie) {
-  let moviesStored = await getMovieSave(MOVIES_KEY);
+  const moviesStored = await getMovieSave();
 
-  const hasmovie = moviesStored.find((item) => item.id === movie.id);
-
-  if (hasmovie) {
-    return true;
-  }
-  return false;
+  return moviesStored.some((item) => item.id === movie.id);
 }

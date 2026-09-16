@@ -8,7 +8,6 @@ export const Container = styled.View`
 export const Header = styled.View`
   z-index: 99;
   position: absolute;
-  top: 35px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -66,7 +65,7 @@ export const Rate = styled.Text`
   color: #fff;
 `;
 
-export const ListGeneres = styled.FlatList`
+export const ListGenres = styled.FlatList`
   padding-left: 14px;
   margin: 8px 0;
   max-height: 35px;

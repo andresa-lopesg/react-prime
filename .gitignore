@@ -46,8 +46,6 @@ AGENTS.md
 # typescript
 *.tsbuildinfo
 
-example
-
 # generated native folders
 /ios
 /android

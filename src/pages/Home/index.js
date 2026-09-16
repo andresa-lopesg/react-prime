@@ -1,9 +1,8 @@
-import { ActivityIndicator, ScrollView } from "react-native";
+import { ScrollView, TouchableOpacity } from "react-native";
 
 import {
   Attribution,
   Banner,
-  BannerButton,
   Container,
   Input,
   SearchButton,
@@ -14,13 +13,14 @@ import {
 
 import { Feather } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
-import ErrorMessage from "../../components/ErrorMessage";
-import Header from "../../components/Header";
-import SliderItem from "../../components/SliderItem";
+import ErrorMessage from "@/components/ErrorMessage";
+import Header from "@/components/Header";
+import Loading from "@/components/Loading";
+import SliderItem from "@/components/SliderItem";
 
 import { useNavigation } from "@react-navigation/native";
-import api, { key } from "../../services/api";
-import { getListMovies, randomBanner } from "../../utils/movie";
+import api, { key } from "@/services/api";
+import { randomBanner } from "@/utils/movie";
 
 function Home() {
   const [nowMovies, setNowMovies] = useState([]);
@@ -65,9 +65,9 @@ function Home() {
         ]);
 
         if (isActive) {
-          const nowList = getListMovies(15, nowData.data.results);
-          const popularList = getListMovies(10, popularData.data.results);
-          const topList = getListMovies(5, topData.data.results);
+          const nowList = nowData.data.results.slice(0, 15);
+          const popularList = popularData.data.results.slice(0, 10);
+          const topList = topData.data.results.slice(0, 5);
 
           setBannerMovie(
             nowData.data.results[randomBanner(nowData.data.results)],
@@ -115,7 +115,7 @@ function Home() {
   if (loading) {
     return (
       <Container>
-        <ActivityIndicator size="large" color="#FFF" />
+        <Loading />
       </Container>
     );
   }
@@ -151,7 +151,7 @@ function Home() {
       <ScrollView showsVerticalScrollIndicator={false}>
         <Title>Em Cartaz</Title>
 
-        <BannerButton
+        <TouchableOpacity
           activeOpacity={0.9}
           onPress={() => navigateDetailsPage(bannerMovie)}
         >
@@ -161,7 +161,7 @@ function Home() {
               uri: `https://image.tmdb.org/t/p/original/${bannerMovie.poster_path}`,
             }}
           />
-        </BannerButton>
+        </TouchableOpacity>
         <SliderMovie
           horizontal={true}
           showsHorizontalScrollIndicator={false}

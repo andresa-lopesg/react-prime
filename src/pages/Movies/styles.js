@@ -6,11 +6,6 @@ export const Container = styled.SafeAreaView`
   padding: 4px 0;
 `;
 
-export const Title = styled.Text`
-  color: #fff;
-  font-size: 18px;
-`;
-
 export const ListMovies = styled.FlatList`
   padding: 0 14px;
 `;

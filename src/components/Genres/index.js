@@ -1,6 +1,6 @@
 import { Container, Name } from "./styles";
 
-function Generes({ data }) {
+function Genres({ data }) {
   return (
     <Container>
       <Name>{data.name}</Name>
@@ -8,4 +8,4 @@ function Generes({ data }) {
   );
 }
 
-export default Generes;
+export default Genres;

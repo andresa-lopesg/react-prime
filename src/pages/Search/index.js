@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { Container, ListMovies } from "./styles";
+import { FlatList } from "react-native";
+import { Container } from "./styles";
 
 import { useNavigation, useRoute } from "@react-navigation/native";
 
-import api, { key } from "../../services/api";
+import api, { key } from "@/services/api";
 
-import ErrorMessage from "../../components/ErrorMessage";
-import SearchItem from "../../components/SearchItem";
+import ErrorMessage from "@/components/ErrorMessage";
+import Loading from "@/components/Loading";
+import SearchItem from "@/components/SearchItem";
 
 function Search() {
   const navigation = useNavigation();
@@ -51,7 +53,7 @@ function Search() {
     return () => {
       isActive = false;
     };
-  }, [retry]);
+  }, [retry, route.params?.name]);
 
   function navigateDetailPage(item) {
     navigation.navigate("Detail", { id: item.id });
@@ -63,7 +65,11 @@ function Search() {
   }
 
   if (loading) {
-    return <Container></Container>;
+    return (
+      <Container>
+        <Loading />
+      </Container>
+    );
   }
 
   if (error) {
@@ -79,7 +85,7 @@ function Search() {
 
   return (
     <Container>
-      <ListMovies
+      <FlatList
         data={movie}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item) => String(item.id)}
