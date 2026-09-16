@@ -1,0 +1,17 @@
+const { defineConfig } = require("eslint/config");
+const expoConfig = require("eslint-config-expo/flat");
+
+module.exports = defineConfig([
+  expoConfig,
+  {
+    ignores: ["dist/*"],
+  },
+  {
+    rules: {
+      // styled-components e axios expoem o mesmo nome como default e nomeado,
+      // o que faz a regra acusar imports corretos.
+      "import/no-named-as-default": "off",
+      "import/no-named-as-default-member": "off",
+    },
+  },
+]);
