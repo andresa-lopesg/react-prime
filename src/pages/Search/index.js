@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FlatList } from "react-native";
 import { Container } from "./styles";
 
@@ -9,6 +9,7 @@ import api, { key } from "@/services/api";
 import ErrorMessage from "@/components/ErrorMessage";
 import Loading from "@/components/Loading";
 import SearchItem from "@/components/SearchItem";
+import Toast from "@/components/Toast";
 
 function Search() {
   const navigation = useNavigation();
@@ -18,6 +19,7 @@ function Search() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [retry, setRetry] = useState(0);
+  const [toast, setToast] = useState("");
 
   useEffect(() => {
     let isActive = true;
@@ -55,7 +57,14 @@ function Search() {
     };
   }, [retry, route.params?.name]);
 
+  const hideToast = useCallback(() => setToast(""), []);
+
   function navigateDetailPage(item) {
+    if (!item.release_date) {
+      setToast("Esse filme ainda não tem data de lançamento");
+      return;
+    }
+
     navigation.navigate("Detail", { id: item.id });
   }
 
@@ -96,6 +105,8 @@ function Search() {
           />
         )}
       />
+
+      {toast ? <Toast message={toast} onHide={hideToast} /> : null}
     </Container>
   );
 }

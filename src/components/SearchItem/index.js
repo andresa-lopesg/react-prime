@@ -2,15 +2,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { Banner, Container, Rate, RateContainer, Title } from "./styles";
 
 function SearchItem({ data, navigatePage }) {
-  function detailMovie() {
-    if (data.release_date === "") {
-      alert("Filme ainda sem data");
-      return;
-    }
-    navigatePage(data);
-  }
   return (
-    <Container activeOpacity={0.7} onPress={detailMovie}>
+    <Container activeOpacity={0.7} onPress={navigatePage}>
       {data?.poster_path ? (
         <Banner
           resizeMethod="resize"

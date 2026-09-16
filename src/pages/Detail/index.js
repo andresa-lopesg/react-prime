@@ -16,7 +16,7 @@ import {
 import { Feather, Ionicons } from "@expo/vector-icons";
 
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Stars from "react-native-stars";
 import api, { key } from "@/services/api";
@@ -25,6 +25,7 @@ import ErrorMessage from "@/components/ErrorMessage";
 import Genres from "@/components/Genres";
 import Loading from "@/components/Loading";
 import ModalLink from "@/components/ModalLink";
+import Toast from "@/components/Toast";
 import { deleteMovie, hasMovie, saveMovie } from "@/utils/storage";
 
 function Detail() {
@@ -38,6 +39,7 @@ function Detail() {
   const [error, setError] = useState(false);
   const [retry, setRetry] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [toast, setToast] = useState("");
 
   useEffect(() => {
     let isActive = true;
@@ -76,17 +78,19 @@ function Detail() {
     };
   }, [retry, route.params?.id]);
 
+  const hideToast = useCallback(() => setToast(""), []);
+
   async function handlefavoriteMovie(movie) {
     if (favoritedMovie) {
       await deleteMovie(movie.id);
       setFavoritedMovie(false);
-      alert("Filme removido da sua lista");
+      setToast("Filme removido da sua lista");
       return;
     }
 
     await saveMovie(movie);
     setFavoritedMovie(true);
-    alert("Filme salvo na sua lista");
+    setToast("Filme salvo na sua lista");
   }
 
   function handleRetry() {
@@ -96,7 +100,7 @@ function Detail() {
 
   function handleOpenLink() {
     if (!movie.homepage) {
-      alert("Esse filme não tem site oficial");
+      setToast("Esse filme não tem site oficial");
       return;
     }
 
@@ -120,7 +124,11 @@ function Detail() {
     return (
       <Container>
         <Header style={{ top: insets.top + 8 }}>
-          <HeaderButton activeOpacity={0.7} onPress={() => navigation.goBack()}>
+          <HeaderButton
+            accessibilityLabel="Voltar"
+            activeOpacity={0.7}
+            onPress={() => navigation.goBack()}
+          >
             <Feather name="arrow-left" size={28} color="#FFF" />
           </HeaderButton>
         </Header>
@@ -136,10 +144,19 @@ function Detail() {
   return (
     <Container>
       <Header style={{ top: insets.top + 8 }}>
-        <HeaderButton activeOpacity={0.7} onPress={() => navigation.goBack()}>
+        <HeaderButton
+          accessibilityLabel="Voltar"
+          activeOpacity={0.7}
+          onPress={() => navigation.goBack()}
+        >
           <Feather name="arrow-left" size={28} color="#FFF" />
         </HeaderButton>
-        <HeaderButton onPress={() => handlefavoriteMovie(movie)}>
+        <HeaderButton
+          accessibilityLabel={
+            favoritedMovie ? "Remover da minha lista" : "Salvar na minha lista"
+          }
+          onPress={() => handlefavoriteMovie(movie)}
+        >
           {favoritedMovie ? (
             <Ionicons name="bookmark" size={28} color="#FFF" />
           ) : (
@@ -155,7 +172,10 @@ function Detail() {
         }}
       />
 
-      <ButtonLink onPress={handleOpenLink}>
+      <ButtonLink
+        accessibilityLabel="Abrir o site oficial do filme"
+        onPress={handleOpenLink}
+      >
         <Feather name="link" size={24} color="#FFF" />
       </ButtonLink>
 
@@ -194,6 +214,8 @@ function Detail() {
           closeModal={() => setOpenLink(false)}
         />
       </Modal>
+
+      {toast ? <Toast message={toast} onHide={hideToast} /> : null}
     </Container>
   );
 }

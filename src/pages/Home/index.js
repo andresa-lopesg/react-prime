@@ -143,7 +143,10 @@ function Home() {
           onChangeText={(text) => setInput(text)}
         />
 
-        <SearchButton onPress={handleSearchMovie}>
+        <SearchButton
+          accessibilityLabel="Buscar filme"
+          onPress={handleSearchMovie}
+        >
           <Feather name="search" size={30} color="#fff" />
         </SearchButton>
       </SearchContainer>

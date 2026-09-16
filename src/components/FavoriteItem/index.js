@@ -24,7 +24,10 @@ function FavoriteItem({ data, handleDelete, navigatePage }) {
           <Title size={14}>Ver Detalhes</Title>
         </DetailButton>
 
-        <DeleteButton onPress={() => handleDelete(data.id)}>
+        <DeleteButton
+          accessibilityLabel={`Remover ${data.title} da lista`}
+          onPress={() => handleDelete(data.id)}
+        >
           <Feather name="trash" size={24} color="#FFFF" />
         </DeleteButton>
       </ActionContainer>

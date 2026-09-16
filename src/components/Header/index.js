@@ -9,6 +9,7 @@ function Header({ title }) {
   return (
     <Container>
       <MenuButton
+        accessibilityLabel="Abrir menu"
         onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
       >
         <Feather name="menu" size={36} color="#fff" />
