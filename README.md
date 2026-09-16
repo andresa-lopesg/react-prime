@@ -52,7 +52,8 @@ npx expo start
 ```
 
 Abra no emulador Android, no simulador iOS ou no
-[Expo Go](https://expo.dev/go) pelo QR code.
+[Expo Go](https://expo.dev/go) pelo QR code. Para rodar no navegador,
+use `npm run web`.
 
 > O arquivo `.env` é lido quando o servidor inicia. Se você editá-lo com o
 > projeto rodando, reinicie o `npx expo start`.
@@ -62,7 +63,7 @@ Abra no emulador Android, no simulador iOS ou no
 ```
 src/
 ├── components/    Header, SliderItem, SearchItem, FavoriteItem,
-│                  Generes, ModalLink e ErrorMessage
+│                  Genres, ModalLink, Loading e ErrorMessage
 ├── pages/         Home, Detail, Search e Movies
 ├── routes/        drawer e stack
 ├── services/      cliente da API da TMDB
