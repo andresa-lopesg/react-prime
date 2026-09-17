@@ -5,7 +5,6 @@ export const Container = styled.TouchableOpacity`
   padding-bottom: 16px;
   padding-right: 16px;
   width: 140px;
-  height: 220px;
 `;
 
 export const BannerItem = styled.Image`
