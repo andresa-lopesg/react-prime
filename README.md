@@ -3,8 +3,12 @@
 App de filmes feito com Expo e React Native, consumindo a API do
 [The Movie Database (TMDB)](https://www.themoviedb.org/).
 
-A tela inicial lista filmes em três categorias — em cartaz, populares e mais
-votados — cada uma num carrossel horizontal com pôster, título e nota.
+A tela inicial lista filmes em três categorias (em cartaz, populares e mais
+votados), cada uma num carrossel horizontal com pôster, título e nota.
+
+| Início | Detalhes | Detalhes |
+|---|---|---|
+| ![Tela inicial](docs/screenshots/home.jpg) | ![Detalhes de Toy Story 5](docs/screenshots/detalhes.jpg) | ![Detalhes de Como Mágica](docs/screenshots/detalhes-2.jpg) |
 
 ## Funcionalidades
 
@@ -81,7 +85,7 @@ arquivos, em vez de espalhado pela estrutura de pastas.
 sincronizar entre aparelhos. Subir um servidor só para guardar ids de filmes
 seria peso sem retorno.
 
-**A chave da API vai embutida no bundle — e tudo bem.** A chave v3 do TMDB só
+**A chave da API vai embutida no bundle, e tudo bem.** A chave v3 do TMDB só
 lê o catálogo público, e qualquer app que chama a API direto do aparelho acaba
 carregando a chave junto. Ela fica fora do versionamento e cada pessoa usa a
 sua; esconder de verdade exigiria um proxy próprio, que não se justifica num
