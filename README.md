@@ -6,9 +6,9 @@ App de filmes feito com Expo e React Native, consumindo a API do
 A tela inicial lista filmes em três categorias (em cartaz, populares e mais
 votados), cada uma num carrossel horizontal com pôster, título e nota.
 
-| Início | Detalhes | Detalhes |
-|---|---|---|
-| ![Tela inicial](docs/screenshots/home.jpg) | ![Detalhes de Toy Story 5](docs/screenshots/detalhes.jpg) | ![Detalhes de Como Mágica](docs/screenshots/detalhes-2.jpg) |
+| Início | Detalhes |
+|---|---|
+| ![Tela inicial](docs/screenshots/home.jpg) | ![Detalhes de Toy Story 5](docs/screenshots/detalhes.jpg) |
 
 ## Funcionalidades
 
